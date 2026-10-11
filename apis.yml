@@ -1,29 +1,101 @@
 aid: v2json
+
 name: V2JSON (SkyV2X)
-description: 'V2JSON (SkyV2X) is a company surfaced via the API Evangelist harvest backlog (source: new-submission)
-  and added to the network as a stub for full-pipeline profiling.'
+
+image: https://v2json.skyv2x.com/v2json-asn1-to-json-decoder-v3.jpg
+
+description: V2JSON (SkyV2X) provides a free online V2X message codec that converts ETSI C‑ITS UPER binary streams to structured JSON and back.
+  It supports a wide range of message types including CAM, DENM, CPM, VAM, MAPEM, SPATEM, SREM, SSEM, IVIM and RTCMEM, offering byte‑exact round‑trip
+  verification. The service is publicly accessible via a REST API with endpoints for decode, encode, and verify, and requires no API key. Documentation
+  is available through a Swagger UI at /docs, and the company also offers an interactive web‑based codec interface.
+
 url: https://raw.githubusercontent.com/api-evangelist/v2json/refs/heads/main/apis.yml
+
 x-type: company
+
 x-source: harvest:new-submission
-x-tier: stub
-x-tier-reason: harvest
+
+x-tier: profiled
+x-tier-reason: enrichment pass 2026-10-11 (modular-v1; was harvest)
+
 specificationVersion: '0.20'
+
 created: '2026-10-11'
+
 modified: '2026-10-11'
+
 tags:
-- Company
-apis: []
+- V2X
+- C-ITS
+- ETSI
+- Codec
+- Free
+
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+
 common:
+- type: AgenticAccess
+  url: agentic-access/v2json-agentic-access.yml
+- type: Spectral
+  url: rules/v2json-rules.yml
+- type: JSONLD
+  url: json-ld/v2json-context.jsonld
+- type: Vocabulary
+  url: vocabulary/v2json-vocabulary.yml
+- type: DataModel
+  url: data-model/v2json-data-model.yml
+- type: ErrorCatalog
+  url: errors/v2json-problem-types.yml
+- type: Conformance
+  url: conformance/v2json-conformance.yml
+- type: LLMsTxt
+  url: llms/v2json-llms.txt
+- type: Hosts
+  url: hosts/v2json-hosts.yml
+- type: DomainSecurity
+  url: security/v2json-domain-security.yml
 - type: Website
   url: https://v2json.skyv2x.com/
 - type: Documentation
   url: https://v2json.skyv2x.com/docs
+
+apis:
+- aid: v2json:v2json-decode-api
+  name: V2JSON (SkyV2X) Decode API
+  description: The decode API from V2JSON (SkyV2X) — 6 operation(s) for decode.
+  humanURL: https://v2json.skyv2x.com/
+  baseURL: https://v2json.skyv2x.com/api/v1
+  tags:
+  - decode
+  properties:
+  - type: OpenAPI
+    url: openapi/v2json-decode-api-openapi.yml
+  - type: Documentation
+    url: https://v2json.skyv2x.com/docs
+  - type: JSONSchema
+    url: json-schema/v2json-decode-request-schema.json
+  - type: JSONSchema
+    url: json-schema/v2json-verify-response-schema.json
+  - type: JSONSchema
+    url: json-schema/v2json-decode-response-schema.json
+  - type: JSONSchema
+    url: json-schema/v2json-encode-response-schema.json
+  - type: JSONSchema
+    url: json-schema/v2json-encode-request-schema.json
+  - type: JSONSchema
+    url: json-schema/v2json-health-response-schema.json
 x-submission-notes: V2X UPER<->JSON codec, ETSI C-ITS, free no key; ships apis.json (aid skyv2x.com:v2json)
-x-submission-probe: apis.json 200, docs 200 (Swagger UI), OpenAPI 3.1.0 200 (6 ops), invented path 404
-  JSON
+
+x-submission-probe: apis.json 200, docs 200 (Swagger UI), OpenAPI 3.1.0 200 (6 ops), invented path 404 JSON
+
 x-submitted-by: contact@blackcycle.ai (apis.io/add, 2026-10-10)
+x-enrichment:
+  date: '2026-10-11'
+  status: enriched
+  artifacts_added: 21
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

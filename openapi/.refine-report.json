@@ -1,0 +1,20 @@
+{
+  "provider": "v2json",
+  "sources": [
+    "v2json-openapi.json"
+  ],
+  "outputs": [
+    "v2json-decode-api-openapi.yml"
+  ],
+  "archived": [
+    "archived openapi/v2json-openapi.json"
+  ],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "v2json-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "v2json-openapi.json: declared missing tag: decode",
+    "apis.yml register: written (+1 apis, 1 total)"
+  ],
+  "skipped": []
+}

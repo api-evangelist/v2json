@@ -1,0 +1,52 @@
+generated: '2026-10-11'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 3
+  own: 3
+  other_domain: 0
+  platform: 0
+  roles:
+  - api
+  - other
+  - website
+hosts:
+- host: api.skyv2x.com
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: skyv2x.com
+  role: api
+  relation: own
+- host: skyv2x.com
+  found_by:
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: skyv2x.com
+  role: other
+  relation: own
+- host: v2json.skyv2x.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - docs-index
+  - spec-found
+  - contract-discovery
+  - well-known
+  types:
+  - Website
+  - Documentation
+  serves:
+  - api
+  - docs
+  - spec
+  registrable_domain: skyv2x.com
+  role: website
+  relation: own

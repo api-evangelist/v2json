@@ -1,0 +1,48 @@
+# V2JSON — V2X codec (decode and encode)
+
+> Free public V2X codec. Paste a hexadecimal UPER stream to get structured JSON, or send JSON to get the UPER hex back. Both directions run on the same service, and an unchanged message round-trips byte-for-byte. Covers the ETSI C-ITS message set: CAM, DENM, CPM, VAM, MAPEM, SPATEM, SREM, SSEM, IVIM and RTCMEM. Live in the browser plus a public REST API. No signup. Operated by SkyV2X.
+
+## Pages
+
+- [Decoder / workbench](https://v2json.skyv2x.com/): Paste hex or edit JSON, decode and encode in place, with enums resolved and units normalized.
+- [Integration guide](https://v2json.skyv2x.com/integration): REST examples in curl, Python, JavaScript and Node.js, for decode, encode and round-trip.
+- [API docs](https://v2json.skyv2x.com/docs): Interactive Swagger UI for the full schema.
+
+## API endpoints
+
+- [Decode](https://v2json.skyv2x.com/api/v1/decode): `POST {hex, type?, enrich?}`. Returns `{success, message_type, metadata, payload}`. Auto-detects the type by messageID when `type` is omitted.
+- [Encode](https://v2json.skyv2x.com/api/v1/encode): `POST {payload, type}`. Returns `{success, hex, metadata}`. The input is the bare decoded message; `type` is explicit (CAM needs `cam_en` or `cam_ts`).
+- [Verify](https://v2json.skyv2x.com/api/v1/verify): `POST {hex}`. Decodes then re-encodes and reports whether the wire bytes match, so an integrator can check an encoder against a byte-exact reference.
+- [Types](https://v2json.skyv2x.com/api/v1/types): `GET` — supported message types with their ETSI standard.
+- [Samples](https://v2json.skyv2x.com/api/v1/samples/{type_id}): `GET` — a random vendor-reference hex sample for the given type, drawn from the ground-truth pool. Useful for trying the API without a capture.
+- [Health](https://v2json.skyv2x.com/api/v1/health): `GET` — liveness probe and binary version.
+
+## Supported message types
+
+| Type | Standard |
+|---|---|
+| CAM — Cooperative Awareness Message | EN 302 637-2 / TS 103 900 |
+| DENM — Decentralized Environmental Notification | EN 302 637-3 / TS 103 831 |
+| CPM — Collective Perception Message | TS 103 324 |
+| VAM — VRU Awareness Message | TS 103 300-3 |
+| MAPEM — MAP intersection data | TS 103 301 |
+| SPATEM — Signal Phase and Timing | TS 103 301 |
+| SREM — Signal Request | TS 103 301 |
+| SSEM — Signal Status | TS 103 301 |
+| IVIM — In-Vehicle Information | TS 103 301 |
+| RTCMEM — RTCM Corrections (GNSS RTK) | TS 103 301 |
+
+## How the codec works
+
+A native binary parses the UPER bit stream against the canonical ETSI ASN.1 module for each message type, and runs the same module in reverse to emit UPER from JSON. The FastAPI backend enriches decoded output: enums resolve to readable names, GNSS coordinates normalize to 7-decimal floats, and decode metadata (bytes consumed, CDD version, message type id) travels alongside the payload. Because both directions share one binary, the round-trip is byte-exact against the vendor reference encodings.
+
+## What it is NOT
+
+- Not a certified conformance platform. The codec is validated byte-exact against vendor reference encoders, but production conformance needs a certified harness.
+- Not a CCMS PKI client. Castell (pki.skyv2x.com) is the separate service for that.
+- Not a semantic validator. A value can be well-formed on the wire and still be meaningless; the codec reports the bits, not whether they make sense.
+
+## Optional
+
+- [Sitemap](https://v2json.skyv2x.com/sitemap.xml): Public page index.
+- [Robots](https://v2json.skyv2x.com/robots.txt): Crawl policy.

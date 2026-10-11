@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/v2json/main/json-schema/v2json-verify-response-schema.json",
+  "title": "VerifyResponse",
+  "x-generated": "2026-10-11",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/v2json-openapi.json#/components/schemas/VerifyResponse",
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "title": "Success"
+    },
+    "round_trip": {
+      "anyOf": [
+        {
+          "type": "boolean"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Round Trip"
+    },
+    "message_type": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Message Type"
+    },
+    "original_bytes": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Original Bytes"
+    },
+    "reencoded_bytes": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Reencoded Bytes"
+    }
+  },
+  "type": "object",
+  "required": [
+    "success"
+  ]
+}

@@ -1,0 +1,20 @@
+generated: '2026-10-11'
+method: derived
+generator: derive-problem-types.py
+source:
+- openapi/v2json-openapi.json
+format: custom
+envelope:
+  media_type: application/json
+  schema: HTTPValidationError
+coverage:
+  operations: 6
+  statuses_declared: 1
+problems:
+- status: 422
+  title: Unprocessable Content
+  description: Validation Error
+  operations: 4
+  media_types:
+  - application/json
+  schema: HTTPValidationError

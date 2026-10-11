@@ -1,0 +1,65 @@
+generated: '2026-10-11'
+method: derived
+generator: derive-vocabulary.py
+source: openapi/v2json-openapi.json
+vocabulary:
+  name: V2JSON (SkyV2X) Domain Vocabulary
+  description: 'Terms declared by V2JSON (SkyV2X)''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-11'
+  terms:
+  - term: DecodeRequest
+    definition: 'Object declared by the contract with fields: hex, type, enrich.'
+    tags:
+    - Object
+    source: openapi/v2json-openapi.json#/components/schemas/DecodeRequest
+  - term: DecodeResponse
+    definition: 'Object declared by the contract with fields: success, message_type, metadata, payload, error.'
+    tags:
+    - Object
+    source: openapi/v2json-openapi.json#/components/schemas/DecodeResponse
+  - term: EncodeRequest
+    definition: 'Object declared by the contract with fields: payload, type.'
+    tags:
+    - Object
+    source: openapi/v2json-openapi.json#/components/schemas/EncodeRequest
+  - term: EncodeResponse
+    definition: 'Object declared by the contract with fields: success, hex, metadata, error.'
+    tags:
+    - Object
+    source: openapi/v2json-openapi.json#/components/schemas/EncodeResponse
+  - term: HTTPValidationError
+    definition: 'Object declared by the contract with fields: detail.'
+    tags:
+    - Object
+    source: openapi/v2json-openapi.json#/components/schemas/HTTPValidationError
+  - term: HealthResponse
+    definition: 'Object declared by the contract with fields: status, binary, binary_version.'
+    tags:
+    - Object
+    source: openapi/v2json-openapi.json#/components/schemas/HealthResponse
+  - term: TypeInfo
+    definition: 'Object declared by the contract with fields: id, name, standard, supported, note.'
+    tags:
+    - Object
+    source: openapi/v2json-openapi.json#/components/schemas/TypeInfo
+  - term: TypesResponse
+    definition: 'Object declared by the contract with fields: types.'
+    tags:
+    - Object
+    source: openapi/v2json-openapi.json#/components/schemas/TypesResponse
+  - term: ValidationError
+    definition: 'Object declared by the contract with fields: loc, msg, type, input, ctx.'
+    tags:
+    - Object
+    source: openapi/v2json-openapi.json#/components/schemas/ValidationError
+  - term: VerifyRequest
+    definition: 'Object declared by the contract with fields: hex.'
+    tags:
+    - Object
+    source: openapi/v2json-openapi.json#/components/schemas/VerifyRequest
+  - term: VerifyResponse
+    definition: 'Object declared by the contract with fields: success, round_trip, message_type, original_bytes, reencoded_bytes.'
+    tags:
+    - Object
+    source: openapi/v2json-openapi.json#/components/schemas/VerifyResponse
