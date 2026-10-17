@@ -166,37 +166,6 @@ paths:
                 $ref: '#/components/schemas/HealthResponse'
 components:
   schemas:
-    HealthResponse:
-      properties:
-        status:
-          type: string
-          enum:
-          - ok
-          - degraded
-          title: Status
-        binary:
-          type: string
-          title: Binary
-        binary_version:
-          type: string
-          title: Binary Version
-      type: object
-      required:
-      - status
-      - binary
-      - binary_version
-      title: HealthResponse
-    TypesResponse:
-      properties:
-        types:
-          items:
-            $ref: '#/components/schemas/TypeInfo'
-          type: array
-          title: Types
-      type: object
-      required:
-      - types
-      title: TypesResponse
     ValidationError:
       properties:
         loc:
@@ -223,6 +192,179 @@ components:
       - msg
       - type
       title: ValidationError
+    VerifyResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+        round_trip:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Round Trip
+        message_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message Type
+        original_bytes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Original Bytes
+        reencoded_bytes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Reencoded Bytes
+      type: object
+      required:
+      - success
+      title: VerifyResponse
+    HealthResponse:
+      properties:
+        status:
+          type: string
+          enum:
+          - ok
+          - degraded
+          title: Status
+        binary:
+          type: string
+          title: Binary
+        binary_version:
+          type: string
+          title: Binary Version
+      type: object
+      required:
+      - status
+      - binary
+      - binary_version
+      title: HealthResponse
+    EncodeRequest:
+      properties:
+        payload:
+          additionalProperties: true
+          type: object
+          title: Payload
+          description: 'Bare decoded message: no wrapper, no _* keys.'
+        type:
+          type: string
+          title: Type
+          description: Explicit type; no 'auto'. CAM needs cam_en or cam_ts.
+      type: object
+      required:
+      - payload
+      - type
+      title: EncodeRequest
+    DecodeResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+        message_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Message Type
+        metadata:
+          additionalProperties: true
+          type: object
+          title: Metadata
+        payload:
+          additionalProperties: true
+          type: object
+          title: Payload
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+      type: object
+      required:
+      - success
+      title: DecodeResponse
+    TypesResponse:
+      properties:
+        types:
+          items:
+            $ref: '#/components/schemas/TypeInfo'
+          type: array
+          title: Types
+      type: object
+      required:
+      - types
+      title: TypesResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    EncodeResponse:
+      properties:
+        success:
+          type: boolean
+          title: Success
+        hex:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Hex
+        metadata:
+          additionalProperties: true
+          type: object
+          title: Metadata
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+      type: object
+      required:
+      - success
+      title: EncodeResponse
+    TypeInfo:
+      properties:
+        id:
+          type: string
+          title: Id
+        name:
+          type: string
+          title: Name
+        standard:
+          type: string
+          title: Standard
+        supported:
+          type: boolean
+          title: Supported
+        note:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Note
+      type: object
+      required:
+      - id
+      - name
+      - standard
+      - supported
+      title: TypeInfo
+    VerifyRequest:
+      properties:
+        hex:
+          type: string
+          maxLength: 20000
+          minLength: 2
+          title: Hex
+          description: Hex-encoded UPER bytes to round-trip.
+      type: object
+      required:
+      - hex
+      title: VerifyRequest
     DecodeRequest:
       properties:
         hex:
@@ -263,145 +405,3 @@ components:
       required:
       - hex
       title: DecodeRequest
-    EncodeResponse:
-      properties:
-        success:
-          type: boolean
-          title: Success
-        hex:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Hex
-        metadata:
-          additionalProperties: true
-          type: object
-          title: Metadata
-        error:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Error
-      type: object
-      required:
-      - success
-      title: EncodeResponse
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    VerifyRequest:
-      properties:
-        hex:
-          type: string
-          maxLength: 20000
-          minLength: 2
-          title: Hex
-          description: Hex-encoded UPER bytes to round-trip.
-      type: object
-      required:
-      - hex
-      title: VerifyRequest
-    VerifyResponse:
-      properties:
-        success:
-          type: boolean
-          title: Success
-        round_trip:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Round Trip
-        message_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message Type
-        original_bytes:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Original Bytes
-        reencoded_bytes:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Reencoded Bytes
-      type: object
-      required:
-      - success
-      title: VerifyResponse
-    TypeInfo:
-      properties:
-        id:
-          type: string
-          title: Id
-        name:
-          type: string
-          title: Name
-        standard:
-          type: string
-          title: Standard
-        supported:
-          type: boolean
-          title: Supported
-        note:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Note
-      type: object
-      required:
-      - id
-      - name
-      - standard
-      - supported
-      title: TypeInfo
-    DecodeResponse:
-      properties:
-        success:
-          type: boolean
-          title: Success
-        message_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Message Type
-        metadata:
-          additionalProperties: true
-          type: object
-          title: Metadata
-        payload:
-          additionalProperties: true
-          type: object
-          title: Payload
-        error:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Error
-      type: object
-      required:
-      - success
-      title: DecodeResponse
-    EncodeRequest:
-      properties:
-        payload:
-          additionalProperties: true
-          type: object
-          title: Payload
-          description: 'Bare decoded message: no wrapper, no _* keys.'
-        type:
-          type: string
-          title: Type
-          description: Explicit type; no 'auto'. CAM needs cam_en or cam_ts.
-      type: object
-      required:
-      - payload
-      - type
-      title: EncodeRequest

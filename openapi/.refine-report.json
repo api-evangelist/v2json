@@ -1,20 +1,21 @@
 {
   "provider": "v2json",
   "sources": [
-    "v2json-openapi.json"
+    "_original/v2json-openapi.json"
   ],
   "outputs": [
     "v2json-decode-api-openapi.yml"
   ],
-  "archived": [
-    "archived openapi/v2json-openapi.json"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "v2json-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
     "v2json-openapi.json: declared missing tag: decode",
-    "apis.yml register: written (+1 apis, 1 total)"
+    "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "v2json-decode-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
