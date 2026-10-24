@@ -70,6 +70,8 @@ apis:
   humanURL: https://v2json.skyv2x.com/
   baseURL: https://v2json.skyv2x.com/api/v1
   tags:
+  - Decode
+  tags_raw:
   - decode
   properties:
   - type: OpenAPI
